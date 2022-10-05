@@ -1,0 +1,42 @@
+%option noyywrap
+
+%{
+
+#include<stdio.h>
+
+#include<stdlib.h>
+
+%}
+
+%%
+
+[0-9]* {printf("Integer\n");}
+
+[0-9]+\.[0-9]+ { printf("Float\n"); }
+
+(void|int|float|double|string|return|bool|char|for|if|do|while|
+
+exit"("[0-9]+")"|case|break|continue|switch|enum|struct|"size of")
+
+{printf("Keyword\n");}
+
+[+|*|/|%|&|-] { printf("Operator\n");}
+
+"/*".*"*/" { printf("Multi Line comment\n");}
+
+"//".* {printf("Single Line Comment");}
+
+[_a-zA-Z][_a-zA-Z0-9]{0,30} {printf("Identifier\n");}
+
+. {printf("Space\n");}
+
+%%
+
+int main()
+
+{
+yylex();
+
+return 0;
+
+}
