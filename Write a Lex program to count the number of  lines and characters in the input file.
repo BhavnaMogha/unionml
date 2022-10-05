@@ -1,0 +1,31 @@
+%option noyywrap
+
+%{
+
+#include<stdio.h>
+
+int linecount=0, charcount=0;
+
+%}
+
+%%
+
+. charcount++;
+
+\n {charcount++;linecount++;}
+
+%%
+
+int main()
+
+{
+
+ yyin=fopen("file1.txt", "r");
+
+ yylex();
+
+ printf("\nNo. of lines = %d", linecount);
+
+ printf("\nTotal no of characters = %d", charcount);
+
+}
